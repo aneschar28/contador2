@@ -1,409 +1,133 @@
 
-/* CONFIGURACIÓN GENERAL */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="es">
 
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f1f5f9;
-    color: #1e293b;
-    min-height: 100vh;
-}
-
-
-/* CONTENEDOR PRINCIPAL */
-
-.maincontainer {
-    max-width: 1400px;
-    margin: auto;
-    padding: 40px 30px;
-}
-
-
-/* HEADER */
-
-.header {
-    background: #172554;
-    color: white;
-    padding: 25px 35px;
-    border-radius: 14px;
-    margin-bottom: 35px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.titulo h2 {
-    font-size: 25px;
-    font-weight: 600;
-}
-
-#productivity{
-
-    font-size: 80px;
-
-}
-
-.titulo p {
-    color: #bfdbfe;
-    font-size: 14px;
-    margin-top: 6px;
-}
-
-
-/* AGENTE */
-
-.agente {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-
-    background: #263b68;
-    padding: 12px 20px;
-    border-radius: 10px;
-}
-
-.agent-icon {
-    width: 45px;
-    height: 45px;
-    background: #3b82f6;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 22px;
-}
-
-.agent-data {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.etiqueta {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    color: #93c5fd;
-    font-weight: 700;
-}
-
-.agente h3 {
-    font-size: 18px;
-    color: white;
-    font-weight: 600;
-}
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* INPUT TICKET */
-
-.ticket-section {
-    display: flex;
-    flex-direction: row;
-    max-width: 450px;
-    margin: 0 auto 35px;
-}
-
-.ticket-section label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 9px;
-    color: #475569;
-}
-
-#myInput {
-    width: 100%;
-    padding: 14px 18px;
+    <title>Ticket Dashboard</title>
 
-    border: 1px solid #cbd5e1;
-    border-radius: 9px;
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    font-size: 16px;
-    outline: none;
+<body>
 
-    background: white;
-}
+    <main class="maincontainer"> 
 
-#myInput:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px #dbeafe;
-}
+        <!-- HEADER -->
+        <header class="header">
 
-.info-container {
-    position: relative;
-    display: inline-block;
-}
+        <div class="titulo"> <!-- titulo -->
+                <h2>Ticket Dashboard</h2>
+                <p>Activity Tracking Dashboard</p>
+            </div>
 
-.info-button {
-    padding: 10px 20px;
-    background-color: #172554;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
+            <div > 
+                <h2 id="productivity">0</h2>
+            </div>
 
-#info-box {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: absolute;
-    top: 110%;
-    left: 0;
-    width: 260px;
-    padding: 15px;
-    background-color: #172554;
-    color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 10;
-}
+            <div class="agente"> 
 
-.info-container:hover #info-box {
-    display: flex;
-}
+                <div class="agent-icon"> 
+                    <span>👤</span>
+                </div>
 
+                <div class="agent-data"> 
+                    <span class="etiqueta">ACTIVE AGENT</span> 
+                    <h3 id="userNameDisplay"></h3>
+                </div>
 
-/* DASHBOARD */
 
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-}
+            </div>
 
+        </header>
 
-/* TARJETAS */
 
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 14px;
+        <!-- INPUT TICKET -->
+        <section class="ticket-section">
 
-    text-align: center;
+            <input
+                type="text"
+                id="myInput"
+                placeholder="Enter the ticket number"
+            >
 
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            <div class="info-container">
+              <button class="info-button">More info</button>
 
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+              <div id="info-box">
+                 <p></p>
+              </div>
+            </div>
 
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
+        </section>
 
 
-/* ICONOS */
+        <!-- CONTADORES -->
+        <section class="dashboard">
 
-.card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    width: 48px;
-    height: 48px;
+            <div class="card solved">
 
-    margin: 0 auto 15px;
+                <span class="card-icon">✓</span>
 
-    border-radius: 50%;
-    font-size: 27px;
-    font-weight: bold;
-}
+                <h1 id="solvedQuantity">0</h1>
+                <h3>ticket handled</h3>
 
+                <div class="actions"> 
+                    <button id="addSolved">+</button>
+            
+                </div>
 
-/* NÚMEROS */
+            </div>
 
-.card h1 {
-    font-size: 48px;
-    margin-bottom: 5px;
-}
+            <div class="card chats">
 
-.card h3 {
-    font-size: 18px;
-    margin-bottom: 22px;
-    color: #475569;
-}
+                <span class="card-icon"><i data-lucide="message-square">💬</i></span>
 
+                <h1 id="chatsQuantity">0</h1>
+                <h3>Chats</h3>
 
-/* BOTONES */
+                <div class="actions"> 
+                    <button id="addChats">+</button>
+                    
+                </div>
 
-.actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
+            </div>
 
-.card button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 7px;
 
-    cursor: pointer;
+            <div class="card outbound">
 
-    font-size: 15px;
-    font-weight: 600;
+                <span class="card-icon">↗</span>
 
-    transition: opacity 0.2s;
-}
+                <h1 id="outboundQuantity">0</h1>
+                <h3>Calls</h3>
 
-.card button:hover {
-    opacity: 0.8;
-}
+                <div class="actions"> 
+                    <button id="addOutbound">+</button>
+                    
+                </div>
 
-.actions button:first-child {
-    min-width: 48px;
-    font-size: 20px;
-}
+            </div>
 
-.actions button:last-child {
-    background: #e2e8f0;
-    color: #334155;
-}
+        </section>
 
 
-/* COLORES DE CADA CONTADOR */
+        <!-- RESET MEMORY -->
+        <div class="reset-container">
 
-.solved h1 { color: #16a34a; }
-.pending h1 { color: #2563eb; }
-.hold h1 { color: #64748b; }
-.chats h1 { color: #0d9488; }
-.outbound h1 { color: #ea580c; }
-.inbound h1 { color: #ca8a04; }
+            <button id="resetmemory" class="reset-memory">
+                ↻ Reset Memory
+            </button>
 
+        </div>
 
-/* ICONOS */
 
-.solved .card-icon {
-    background: #dcfce7;
-    color: #16a34a;
-}
+    </main>
 
-.pending .card-icon {
-    background: #dbeafe;
-    color: #2563eb;
-}
 
-.hold .card-icon {
-    background: #e2e8f0;
-    color: #64748b;
-}
+    <script src="code.js"></script>
 
-.chats .card-icon {
-    background: #ccfbf1;
-    color: #0d9488;
-}
-
-.outbound .card-icon {
-    background: #ffedd5;
-    color: #ea580c;
-}
-
-.inbound .card-icon {
-    background: #fef3c7;
-    color: #ca8a04;
-}
-
-
-/* BOTONES DE SUMAR */
-
-.solved .actions button:first-child {
-    background: #16a34a;
-    color: white;
-}
-
-.pending .actions button:first-child {
-    background: #2563eb;
-    color: white;
-}
-
-.hold .actions button:first-child {
-    background: #64748b;
-    color: white;
-}
-
-.chats .actions button:first-child {
-    background: #0d9488;
-    color: white;
-}
-
-.outbound .actions button:first-child {
-    background: #ea580c;
-    color: white;
-}
-
-.inbound .actions button:first-child {
-    background: #ca8a04;
-    color: white;
-}
-
-
-/* RESET MEMORY */
-
-.reset-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 35px;
-}
-
-.reset-memory {
-    padding: 13px 28px;
-
-    background: white;
-    color: #172554;
-
-    border: 1px solid #172554;
-    border-radius: 9px;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.reset-memory:hover {
-    background: #172554;
-    color: white;
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 750px) {
-
-    .dashboard {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (max-width: 480px) {
-
-    .maincontainer {
-        padding: 20px 15px;
-    }
-
-    .dashboard {
-        grid-template-columns: 1fr;
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .agente {
-        width: 100%;
-    }
-
-}
+</body>
+</html>
